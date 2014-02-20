@@ -1,0 +1,11 @@
+template {
+	name=TriggerBasicShipSpawn
+	components {
+		component {
+			class=com.ractoc.fs.components.es.AiComponent
+			properties {
+				script=/Scripts/AI/BasicSpawnScript.ais
+			}
+		}
+	}
+}

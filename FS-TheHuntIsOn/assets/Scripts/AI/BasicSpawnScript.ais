@@ -1,0 +1,36 @@
+script {
+    name=Basic Spawn Script
+    entry=range
+    components {
+        component {
+            class=com.ractoc.fs.components.ai.RangeTriggerComponent
+            id=range
+            properties {
+                range=5
+            }
+            exits {
+                inRange=spawn
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.SpawnShipComponent
+            id=spawn
+            properties {
+                shipTemplate=/Templates/Entity/BasicShipTemplate.etpl
+            }
+            exits {
+                spawned=approach
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.ApproachComponent
+            id=approach
+            properties {
+                range=5
+            }
+            exits {
+                arived=exit
+            }
+        }
+    }
+}

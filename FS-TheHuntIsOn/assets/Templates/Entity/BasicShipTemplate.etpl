@@ -1,0 +1,21 @@
+template {
+	name=Basic Ship Templat
+	components {
+		component {
+			class=com.ractoc.fs.components.es.RenderComponent
+			properties {
+				j3o=/Models/Plane1.j3o
+			}
+		}
+		component {
+			class=com.ractoc.fs.components.es.CanMoveComponent
+			properties {
+				maxSpeed=15.0
+				acceleration=5
+				deceleration=0.25
+				brake=5
+				turnSpeed=2.5
+			}
+		}
+	}
+}
