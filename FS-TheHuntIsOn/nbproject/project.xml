@@ -25,6 +25,14 @@
         </data>
         <references xmlns="http://www.netbeans.org/ns/ant-project-references/1">
             <reference>
+                <foreign-project>fs-aicomponents</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
                 <foreign-project>fs-aisystem</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -33,7 +41,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>fs-components</foreign-project>
+                <foreign-project>fs-entitycomponents</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
