@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.ractoc.fs.aigame.textures;
+package com.ractoc.fs.games.thehuntison.textures;
 
 import com.jme3.texture.Image;
 import com.jme3.texture.Texture;

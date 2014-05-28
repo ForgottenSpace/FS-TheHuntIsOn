@@ -1,4 +1,4 @@
-package com.ractoc.fs.aigame.appstates;
+package com.ractoc.fs.games.thehuntison.appstates;
 
 import com.jme3.app.Application;
 import com.jme3.app.SimpleApplication;
@@ -16,7 +16,7 @@ import com.jme3.texture.Texture;
 import com.jme3.texture.Texture.MagFilter;
 import com.jme3.texture.Texture.MinFilter;
 import com.jme3.texture.Texture.WrapMode;
-import com.ractoc.fs.aigame.textures.StarField;
+import com.ractoc.fs.games.thehuntison.textures.StarField;
 import com.ractoc.fs.components.es.ControlledComponent;
 import com.ractoc.fs.components.es.LocationComponent;
 import com.ractoc.fs.components.es.RenderComponent;

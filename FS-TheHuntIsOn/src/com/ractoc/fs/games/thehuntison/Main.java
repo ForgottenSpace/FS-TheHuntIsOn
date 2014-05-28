@@ -1,4 +1,4 @@
-package mygame;
+package com.ractoc.fs.games.thehuntison;
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.state.AppState;
@@ -8,12 +8,13 @@ import com.jme3.light.DirectionalLight;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
-import com.ractoc.fs.aigame.appstates.StarFieldAppState;
+import com.ractoc.fs.games.thehuntison.appstates.StarFieldAppState;
 import com.ractoc.fs.appstates.AiAppState;
 import com.ractoc.fs.appstates.FlightAppState;
 import com.ractoc.fs.appstates.FlightControlAppState;
 import com.ractoc.fs.appstates.SceneAppState;
 import com.ractoc.fs.components.es.AiComponent;
+import com.ractoc.fs.components.es.BoundedEntityComponent;
 import com.ractoc.fs.components.es.CanMoveComponent;
 import com.ractoc.fs.components.es.ControlledComponent;
 import com.ractoc.fs.components.es.Controls;
@@ -92,11 +93,8 @@ public class Main extends SimpleApplication {
 
         if (template.getComponents() != null && template.getComponents().size() > 0) {
             EntityComponent[] components = (EntityComponent[]) template.getComponentsAsArray();
-for (EntityComponent component : components) {
-    System.out.println("comp: " + component);
-}
             Entity entity = entities.createEntity(components);
-            entities.addComponentsToEntity(entity, new LocationComponent(Vector3f.ZERO, new Quaternion(), new Vector3f(1, 1, 1)), new ControlledComponent());
+            entities.addComponentsToEntity(entity, new LocationComponent(Vector3f.ZERO, new Quaternion(), new Vector3f(1, 1, 1)), new ControlledComponent(), new BoundedEntityComponent());
         } else {
             throw new ParserException("No components for template /Templates/Entity/BasicShipTemplate.etpl");
         }
@@ -107,6 +105,8 @@ for (EntityComponent component : components) {
         assetManager.registerLoader(TemplateLoader.class, "etpl", "ETPL");
         assetManager.registerLoader(AiScriptLoader.class, "ais", "AIS");
 
+        Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
+                BoundedEntityComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                 CanMoveComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
@@ -127,10 +127,12 @@ for (EntityComponent component : components) {
 
     private void setupAppStates() {
         SceneAppState sceneAppState = new SceneAppState("Scenes/TriggerTest.j3o");
+        sceneAppState.setPlayerCentric(false);
         stateManager.attach(sceneAppState);
         FlightControlAppState flightControlAppState = new FlightControlAppState();
         stateManager.attach(flightControlAppState);
         FlightAppState flightAppState = new FlightAppState();
+        flightAppState.setBounded(true);
         stateManager.attach(flightAppState);
         AiAppState triggerAppState = new AiAppState();
         stateManager.attach(triggerAppState);
