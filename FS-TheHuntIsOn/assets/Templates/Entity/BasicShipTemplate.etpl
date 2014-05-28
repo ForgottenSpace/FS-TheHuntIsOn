@@ -1,5 +1,5 @@
 template {
-	name=Basic Ship Templat
+	name=Basic Ship Template
 	components {
 		component {
 			class=com.ractoc.fs.components.es.RenderComponent
@@ -11,10 +11,16 @@ template {
 			class=com.ractoc.fs.components.es.CanMoveComponent
 			properties {
 				maxSpeed=15.0
-				acceleration=5
+				acceleration=5.0
 				deceleration=0.25
-				brake=5
+				brake=5.0
 				turnSpeed=2.5
+			}
+		}
+		component {
+			class=com.ractoc.fs.components.es.StructureComponent
+			properties {
+				hitpoints=1000
 			}
 		}
 	}

@@ -23,6 +23,7 @@ import com.ractoc.fs.components.es.LocationComponent;
 import com.ractoc.fs.components.es.MovementComponent;
 import com.ractoc.fs.components.es.RenderComponent;
 import com.ractoc.fs.components.es.SpeedComponent;
+import com.ractoc.fs.components.es.StructureComponent;
 import com.ractoc.fs.es.Entities;
 import com.ractoc.fs.es.Entity;
 import com.ractoc.fs.es.EntityComponent;
@@ -31,7 +32,6 @@ import com.ractoc.fs.parsers.ParserException;
 import com.ractoc.fs.parsers.ai.AiScriptLoader;
 import com.ractoc.fs.parsers.entitytemplate.EntityTemplate;
 import com.ractoc.fs.parsers.entitytemplate.TemplateLoader;
-
 
 public class Main extends SimpleApplication {
 
@@ -106,23 +106,25 @@ public class Main extends SimpleApplication {
         assetManager.registerLoader(AiScriptLoader.class, "ais", "AIS");
 
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                BoundedEntityComponent.class);
+                                                                          AiComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                CanMoveComponent.class);
+                                                                          BoundedEntityComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                ControlledComponent.class);
+                                                                          CanMoveComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                HasFocusComponent.class);
+                                                                          ControlledComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                LocationComponent.class);
+                                                                          HasFocusComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                MovementComponent.class);
+                                                                          LocationComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                RenderComponent.class);
+                                                                          MovementComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                SpeedComponent.class);
+                                                                          RenderComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
-                AiComponent.class);
+                                                                          SpeedComponent.class);
+        Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
+                                                                          StructureComponent.class);
     }
 
     private void setupAppStates() {
@@ -140,16 +142,16 @@ public class Main extends SimpleApplication {
 
     private void setupKeys() {
         inputManager.addMapping(Controls.MOVE_FORWARD.name(),
-                new KeyTrigger(KeyInput.KEY_W));
+                                new KeyTrigger(KeyInput.KEY_W));
         inputManager.addMapping(Controls.MOVE_BACKWARDS.name(),
-                new KeyTrigger(KeyInput.KEY_S));
+                                new KeyTrigger(KeyInput.KEY_S));
         inputManager.addMapping(Controls.STRAFE_LEFT.name(),
-                new KeyTrigger(KeyInput.KEY_Q));
+                                new KeyTrigger(KeyInput.KEY_Q));
         inputManager.addMapping(Controls.STRAFE_RIGHT.name(),
-                new KeyTrigger(KeyInput.KEY_E));
+                                new KeyTrigger(KeyInput.KEY_E));
         inputManager.addMapping(Controls.ROTATE_LEFT.name(),
-                new KeyTrigger(KeyInput.KEY_A));
+                                new KeyTrigger(KeyInput.KEY_A));
         inputManager.addMapping(Controls.ROTATE_RIGHT.name(),
-                new KeyTrigger(KeyInput.KEY_D));
+                                new KeyTrigger(KeyInput.KEY_D));
     }
 }
