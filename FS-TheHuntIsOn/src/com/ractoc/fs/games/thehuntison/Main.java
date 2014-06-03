@@ -10,18 +10,23 @@ import com.jme3.math.Vector3f;
 import com.jme3.renderer.RenderManager;
 import com.ractoc.fs.games.thehuntison.appstates.StarFieldAppState;
 import com.ractoc.fs.appstates.AiAppState;
+import com.ractoc.fs.appstates.DamageAppState;
 import com.ractoc.fs.appstates.FlightAppState;
 import com.ractoc.fs.appstates.FlightControlAppState;
 import com.ractoc.fs.appstates.SceneAppState;
+import com.ractoc.fs.appstates.ShootingAppState;
 import com.ractoc.fs.components.es.AiComponent;
 import com.ractoc.fs.components.es.BoundedEntityComponent;
 import com.ractoc.fs.components.es.CanMoveComponent;
 import com.ractoc.fs.components.es.ControlledComponent;
 import com.ractoc.fs.components.es.Controls;
+import com.ractoc.fs.components.es.DamageComponent;
 import com.ractoc.fs.components.es.HasFocusComponent;
 import com.ractoc.fs.components.es.LocationComponent;
 import com.ractoc.fs.components.es.MovementComponent;
+import com.ractoc.fs.components.es.OriginComponent;
 import com.ractoc.fs.components.es.RenderComponent;
+import com.ractoc.fs.components.es.ShootMainComponent;
 import com.ractoc.fs.components.es.SpeedComponent;
 import com.ractoc.fs.components.es.StructureComponent;
 import com.ractoc.fs.es.Entities;
@@ -114,6 +119,8 @@ public class Main extends SimpleApplication {
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                                                                           ControlledComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
+                                                                          DamageComponent.class);
+        Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                                                                           HasFocusComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                                                                           LocationComponent.class);
@@ -122,9 +129,13 @@ public class Main extends SimpleApplication {
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                                                                           RenderComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
+                                                                          ShootMainComponent.class);
+        Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                                                                           SpeedComponent.class);
         Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
                                                                           StructureComponent.class);
+        Entities.getInstance().registerComponentTypesWithComponentStorage(new InMemoryComponentStorage(),
+                                                                          OriginComponent.class);
     }
 
     private void setupAppStates() {
@@ -138,6 +149,8 @@ public class Main extends SimpleApplication {
         stateManager.attach(flightAppState);
         AiAppState triggerAppState = new AiAppState();
         stateManager.attach(triggerAppState);
+        stateManager.attach(new ShootingAppState());
+        stateManager.attach(new DamageAppState());
     }
 
     private void setupKeys() {
@@ -153,5 +166,7 @@ public class Main extends SimpleApplication {
                                 new KeyTrigger(KeyInput.KEY_A));
         inputManager.addMapping(Controls.ROTATE_RIGHT.name(),
                                 new KeyTrigger(KeyInput.KEY_D));
+        inputManager.addMapping(Controls.SHOOT_MAIN.name(),
+                                new KeyTrigger(KeyInput.KEY_SPACE));
     }
 }
