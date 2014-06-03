@@ -29,7 +29,17 @@ script {
                 range=5
             }
             exits {
-                arived=exit
+                destroyed=respawn
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.TimerComponent
+            id=respawn
+            properties {
+                interval=5
+            }
+            exits {
+                time=range
             }
         }
     }
