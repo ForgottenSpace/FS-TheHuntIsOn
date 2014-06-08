@@ -7,7 +7,6 @@ import com.jme3.input.controls.KeyTrigger;
 import com.jme3.light.DirectionalLight;
 import com.jme3.math.Quaternion;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.RenderManager;
 import com.ractoc.fs.games.thehuntison.appstates.StarFieldAppState;
 import com.ractoc.fs.appstates.AiAppState;
 import com.ractoc.fs.appstates.DamageAppState;
@@ -61,16 +60,6 @@ public class Main extends SimpleApplication {
         setupCamera();
         setupStarField();
         spawnPlayer();
-    }
-
-    @Override
-    public void simpleUpdate(float tpf) {
-        //TODO: add update code
-    }
-
-    @Override
-    public void simpleRender(RenderManager rm) {
-        //TODO: add render code
     }
 
     private void setupStarField() {

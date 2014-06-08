@@ -64,16 +64,16 @@ public final class StarFieldAppState extends AbstractAppState {
     /**
      * Constructor which overrides all the defaults.
      * <p/>
-     * @param screenWidth The width of the starfield.
-     * @param screenHeight The height of the starfield.
-     * @param starDensity The density of the stars in a layer. This is for all
-     * layers.
-     * @param nrStarLayers The number of layers.
+     * @param screenWidth        The width of the starfield.
+     * @param screenHeight       The height of the starfield.
+     * @param starDensity        The density of the stars in a layer. This is for all
+     *                           layers.
+     * @param nrStarLayers       The number of layers.
      * @param layerBaseStarSpeed The base movement speed of the stars in the top
-     * layer.
-     * @param layerBaseStarSize The base size of the stars in the top layer.
-     * @param starLayerDistance The distance of the star field. All layers are
-     * at the same distance.
+     *                           layer.
+     * @param layerBaseStarSize  The base size of the stars in the top layer.
+     * @param starLayerDistance  The distance of the star field. All layers are
+     *                           at the same distance.
      */
     public StarFieldAppState(final Entities entities) {
         this.entities = entities;
@@ -82,7 +82,7 @@ public final class StarFieldAppState extends AbstractAppState {
 
     @Override
     public void initialize(final AppStateManager asm,
-            final Application app) {
+                           final Application app) {
         super.initialize(asm, app);
         if (shouldBeInitialized()) {
             this.sApp = (SimpleApplication) app;
@@ -106,9 +106,8 @@ public final class StarFieldAppState extends AbstractAppState {
     }
 
     private void createLayer(final int layerIndex) {
-        //TODO: alter this to a fixed divider and then use this to calculate the maximum sApp.getCamera().getLocation().y for sooming out.
         double divider =
-                (1 + starFieldDistance / sApp.getCamera().getLocation().y);
+               (1 + starFieldDistance / sApp.getCamera().getLocation().y);
 
         double dScreenHeight = 2 * (height / divider) + height;
         int screenHeight = (int) dScreenHeight;
@@ -117,7 +116,7 @@ public final class StarFieldAppState extends AbstractAppState {
         int screenWidth = (int) dScreenWidth;
 
         double dScreenDensity =
-                ((dScreenWidth * dScreenHeight) / (width * height))
+               ((dScreenWidth * dScreenHeight) / (width * height))
                 * density;
         int screenDensity = (int) dScreenDensity;
         int starFieldDensity = screenDensity - (screenDensity / nrLayers) * (nrLayers - (layerIndex + 1));
@@ -139,7 +138,7 @@ public final class StarFieldAppState extends AbstractAppState {
         stars.setMagFilter(MagFilter.Nearest);
         stars.setWrap(WrapMode.Repeat);
         Material mat1 = new Material(sApp.getAssetManager(),
-                "MatDefs/MovingTexture.j3md");
+                                     "MatDefs/MovingTexture.j3md");
         mat1.setTexture("ColorMap", stars);
         mat1.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         mat1.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
@@ -185,11 +184,11 @@ public final class StarFieldAppState extends AbstractAppState {
     }
 
     private void moveLayer(final float tpf,
-            final int layerIndex,
-            final LocationComponent locComp) {
+                           final int layerIndex,
+                           final LocationComponent locComp) {
         layers.get(layerIndex).setVector2("posDelta",
-                new Vector2f(locComp.getTranslation().x,
-                -locComp.getTranslation().z));
+                                          new Vector2f(locComp.getTranslation().x,
+                                                       -locComp.getTranslation().z));
         layers.get(layerIndex).setFloat("parallaxScale", (nrLayers - layerIndex)
                 * layerBaseSpeed);
     }

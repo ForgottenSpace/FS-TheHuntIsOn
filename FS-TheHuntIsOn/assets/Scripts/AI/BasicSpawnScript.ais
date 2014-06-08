@@ -19,17 +19,17 @@ script {
                 shipTemplate=/Templates/Entity/BasicShipTemplate.etpl
             }
             exits {
-                spawned=approach
+                spawned=actions
             }
         }
         component {
-            class=com.ractoc.fs.components.ai.ApproachComponent
-            id=approach
+            class=com.ractoc.fs.components.ai.SubScriptComponent
+            id=actions
             properties {
-                range=5
+                scripts=/Scripts/AI/BasicMovementScript.ais, /Scripts/AI/BasicShootingScript.ais
             }
             exits {
-                destroyed=respawn
+                exit=respawn
             }
         }
         component {
