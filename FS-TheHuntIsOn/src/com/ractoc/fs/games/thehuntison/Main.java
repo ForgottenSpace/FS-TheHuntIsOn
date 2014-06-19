@@ -74,6 +74,7 @@ public class Main extends SimpleApplication {
         sfas.setRandomStarColorInterval(5);
         sfas.setRandomStarSizeInterval(5);
         sfas.setRandomStarSizeShift(5);
+        sfas.setVisibility(0.75f);
         stateManager.attach(sfas);
     }
 

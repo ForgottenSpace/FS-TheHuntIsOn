@@ -28,6 +28,7 @@ public final class StarField {
     private Color starColor;
     private Color[][] stars;
     private static Random rand = new Random(System.currentTimeMillis());
+    private float visibility = 1f;
 
     /**
      * Basic constructor, takes all the mandatory parameters plus the optional
@@ -344,7 +345,11 @@ public final class StarField {
         int r = rand.nextInt(256);
         int g = rand.nextInt(256);
         int b = rand.nextInt(256);
-        int a = 0XFF;
+        int a = (int) (0XFF * visibility);
         return new Color(r, g, b, a);
+    }
+
+    public void setVisibility(float visibility) {
+        this.visibility = visibility;
     }
 }

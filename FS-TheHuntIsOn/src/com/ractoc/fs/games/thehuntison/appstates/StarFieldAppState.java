@@ -7,6 +7,7 @@ import com.jme3.app.state.AppStateManager;
 import com.jme3.material.Material;
 import com.jme3.material.RenderState.BlendMode;
 import com.jme3.material.RenderState.FaceCullMode;
+import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector2f;
 import com.jme3.scene.Geometry;
@@ -57,6 +58,7 @@ public final class StarFieldAppState extends AbstractAppState {
     private List<Material> layers = new ArrayList<>();
     private Node starfield = new Node("starfield");
     private float layerBaseSpeed;
+    private float visibility = 1f;
     private final Entities entities;
     private final EntityResultSet entSet;
     private Entity entity;
@@ -131,6 +133,7 @@ public final class StarFieldAppState extends AbstractAppState {
         sf.setRandomStarSizeShift(randomStarSizeShift
                 - (randomStarSizeShift / nrLayers)
                 * layerIndex);
+        sf.setVisibility(visibility);
         Quad starQuad = new Quad(screenWidth, screenHeight);
         Geometry field = new Geometry("starField_" + layerIndex, starQuad);
         Texture stars = sf.generate();
@@ -140,6 +143,7 @@ public final class StarFieldAppState extends AbstractAppState {
         Material mat1 = new Material(sApp.getAssetManager(),
                                      "MatDefs/MovingTexture.j3md");
         mat1.setTexture("ColorMap", stars);
+        mat1.setFloat("visibility", visibility / layerIndex);
         mat1.getAdditionalRenderState().setBlendMode(BlendMode.Alpha);
         mat1.getAdditionalRenderState().setFaceCullMode(FaceCullMode.Off);
         layers.add(layerIndex, mat1);
@@ -395,6 +399,10 @@ public final class StarFieldAppState extends AbstractAppState {
      */
     public void setStarFieldDistance(final int starLayerDistance) {
         this.starFieldDistance = starLayerDistance;
+    }
+
+    public void setVisibility(float visibility) {
+        this.visibility = visibility;
     }
 
     private boolean shouldBeInitialized() {
