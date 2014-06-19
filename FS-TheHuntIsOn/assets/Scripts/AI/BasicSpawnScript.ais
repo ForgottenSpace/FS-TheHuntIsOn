@@ -26,7 +26,7 @@ script {
             class=com.ractoc.fs.components.ai.SubScriptComponent
             id=actions
             properties {
-                scripts=/Scripts/AI/BasicMovementScript.ais, /Scripts/AI/BasicShootingScript.ais
+                scripts=/Scripts/AI/BasicMovementScript.ais
             }
             exits {
                 exit=respawn
@@ -35,6 +35,46 @@ script {
         component {
             class=com.ractoc.fs.components.ai.TimerComponent
             id=respawn
+            properties {
+                interval=5
+            }
+            exits {
+                time=range2
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.RangeTriggerComponent
+            id=range2
+            properties {
+                range=5
+            }
+            exits {
+                inRange=spawn2
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.SpawnShipComponent
+            id=spawn2
+            properties {
+                shipTemplate=/Templates/Entity/BasicShipTemplate.etpl
+            }
+            exits {
+                spawned=actions2
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.SubScriptComponent
+            id=actions2
+            properties {
+                scripts=/Scripts/AI/BasicMovementScript.ais,/Scripts/AI/BasicShootingScript.ais
+            }
+            exits {
+                exit=respawn2
+            }
+        }
+        component {
+            class=com.ractoc.fs.components.ai.TimerComponent
+            id=respawn2
             properties {
                 interval=5
             }
